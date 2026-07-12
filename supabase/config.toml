@@ -1,0 +1,26 @@
+﻿# Filled in per client at scaffold time (the Supabase project ref).
+project_id = "vlraleulstltymsqcffc"
+
+[functions.chat-ai]
+verify_jwt = false
+
+[functions.log]
+verify_jwt = false
+
+[functions.session-name]
+verify_jwt = false
+
+[functions.session-identity]
+verify_jwt = false
+
+[functions.export]
+verify_jwt = true
+
+[functions.admin-list]
+verify_jwt = true
+
+[functions.admin-manage]
+verify_jwt = true
+
+[functions.cost-tracking]
+verify_jwt = true

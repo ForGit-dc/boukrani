@@ -1,0 +1,205 @@
+// Trilingual copy for the landing page (EN / FR / AR).
+// Technical terms (SARIMA, LSTM, RAG, LangChain, model names) are intentionally kept in English.
+// Every number here traces to intake/boukrani/PROFILE.md. Never add a figure that is not there.
+
+export type LandingLang = "en" | "fr" | "ar";
+
+export const LANDING_COPY = {
+  en: {
+    nav: { investigation: "Publication", track: "Track record", signals: "Signals", contact: "Contact" },
+    eyebrow: "Data Scientist · AI Engineer · ENSAI × INSEA",
+    hero: { l1: "I make data ", glow: "trustworthy", l2: ".", shipPre: "Then I ", shipStrong: "build the AI on top." },
+    lede: "End-to-end data and AI systems, from database engineering to generative AI (NLP, RAG, LLM). Research rigor, published at EGC 2026.",
+    chat: { placeholder: "Ask my AI anything about my work", send: "Ask" },
+    chips: [
+      { label: "30-second intro", q: "Give me a 30-second intro." },
+      { label: "Your EGC 2026 paper?", q: "Tell me about your EGC 2026 paper." },
+      { label: "Concrete impact you had?", q: "What concrete, measurable impact have you delivered?" },
+      { label: "Why should we hire you?", q: "Why should we hire you? What makes you stand out?" },
+    ],
+    seeInv: "See the publication",
+    status: { prefix: "CURRENTLY", role: "Data Scientist / AI Engineer · open to opportunities", loc: "Paris, France" },
+    readout: { lab: "The readout", h2: "An engineer obsessed with data quality." },
+    card: {
+      role: "Role", base: "Base", degrees: "Degrees", focus: "Focus", cloud: "Cloud", languages: "Languages",
+      roleV: "Data Scientist / AI Engineer", baseV: "Paris, France", degreesV: "ENSAI × INSEA (dual)", focusV: "NLP/GenAI · ML · Time Series", cloudV: "GCP · BigQuery · Cloud Run", languagesV: "FR · EN · العربية",
+    },
+    bio: {
+      p1: "I design data and AI systems end to end, from database engineering to generative AI architectures (NLP, RAG, LLM). At Orange Research I spent six months hunting mislabeled data with influence functions; the study became a first-author paper at EGC 2026.",
+      quote: "\"Make data and AI a real lever for decisions and business value.\"",
+      sig: "// dual engineering degree ENSAI & INSEA · first-author paper at EGC 2026 · TOEIC 860/990",
+    },
+    inv: {
+      lab: "Signature publication · EGC 2026",
+      titlePre: "Hunting ", titleEm: "label noise", titlePost: " with influence functions.",
+      tag: "First author · RNTI-E-42 · pages 229-240",
+      paperTitle: "Fonctions d'influences pour la détection d'exemples mal étiquetés : une étude comparative",
+      paperDesc: "With Pierre Nodet and Vincent Lemaire (Orange Research). We compare influence-function methods to identify mislabeled training examples and filter them to improve learning performance in classification.",
+      open: "Read the paper ↗",
+    },
+    stats: ["Datasets benchmarked", "Models trained (approx.)", "Balanced accuracy, before", "After label-noise filtering"],
+    sigNote: "A comparative study of influence functions for detecting mislabeled training data, conducted during my end-of-studies internship at Orange Research (ADIS team) on 14 textual and tabular datasets, and published in the EGC 2026 proceedings.",
+    track: {
+      lab: "Track record", h2: "From research bench to running systems.",
+      items: [
+        { title: "Label-noise research & ML engineering", org: " · Orange · End-of-studies internship", metric: "75% → 84% balanced accuracy", desc: "ETL for 14 datasets, a benchmark of approximately 136,000 trained models comparing influence-function variants; published at EGC 2026.", when: "APR-SEPT 2025" },
+        { title: "Temperature forecasting & kriging", org: " · CREST · Internship", metric: "RMSE 5.152", desc: "Hybrid additive SARIMA-LSTM (versus 6.845 for SARIMA alone); spatial kriging with a DNN-fitted variogram, R² 99.25% on test.", when: "JUN-AUG 2024" },
+        { title: "GenAI RAG on financial reports", org: " · Personal project", metric: "LangChain · LlamaParse · FAISS", desc: "A RAG pipeline over financial PDF reports with precise document parsing.", when: "OPEN SOURCE" },
+        { title: "RoBERTa sentiment pipeline", org: " · Personal project", metric: "FastAPI · Streamlit", desc: "A complete NLP pipeline for customer reviews, served as a REST API with a dedicated UI.", when: "OPEN SOURCE" },
+        { title: "Data Analyst", org: " · Haut Commissariat au Plan", metric: "Agadir, Morocco", desc: "Morocco's national statistics and planning institution.", when: "JUL 2022" },
+      ],
+    },
+    proof: {
+      lab: "Proof, in numbers", h2: "Outcomes I can defend.",
+      desc: [
+        "RMSE · hybrid SARIMA-LSTM temperature forecaster (CREST)",
+        "R² on test · DNN-fitted variogram for kriging (CREST)",
+        "Complex medical databases merged and cleaned",
+        "SVM precision · medical-data project",
+        "TOEIC score · English B2+",
+        "Course certificates (IBM, Huawei, UPenn)",
+      ],
+    },
+    signals: {
+      lab: "Signals out", h2: "What backs it up.",
+      paper: { tag: "Peer-reviewed · RNTI", title: "EGC 2026 · RNTI-E-42", desc: "First-author paper, pages 229-240, with Pierre Nodet and Vincent Lemaire (Orange Research): influence functions for mislabeled-data detection." },
+      github: { tag: "Open source · GitHub", title: "LLM-RAG & Sentiment-Analysis-NLP", desc: "A RAG pipeline over financial PDF reports, and a RoBERTa sentiment pipeline served via FastAPI with a Streamlit UI." },
+      certs: { tag: "Certifications", title: "IBM · Huawei · UPenn", desc: "HCIA-AI (Huawei), four IBM Skills Network courses via Coursera, and Data Analysis Using Python (University of Pennsylvania). Plus TOEIC 860/990." },
+      education: { tag: "Education", title: "ENSAI × INSEA, dual degree", desc: "Diplôme d'ingénieur at ENSAI (Data Science & Statistics, 2023-2025) and INSEA (Data Science, 2021-2023), after a DEUG in mathematics at Université Ibn Zohr." },
+    },
+    talk: { eyebrow: "Don't read a CV. Interrogate it.", h2pre: "Talk to ", h2em: "my model", lede: "I built a grounded AI that answers as me, in French, English or Arabic. Ask it about a project, a metric, or how I'd approach your problem.", open: "Open the chat" },
+    footer: { left: "© 2026 Mohamed Boukrani · Conversational portfolio", baraka: "Built with rigor, zero invented numbers." },
+  },
+
+  fr: {
+    nav: { investigation: "Publication", track: "Parcours", signals: "Signaux", contact: "Contact" },
+    eyebrow: "Data Scientist · AI Engineer · ENSAI × INSEA",
+    hero: { l1: "Je rends la donnée ", glow: "fiable", l2: ".", shipPre: "Puis j'y ", shipStrong: "construis l'IA." },
+    lede: "Des systèmes de données et d'IA de bout en bout, de l'ingénierie des bases de données à l'IA générative (NLP, RAG, LLM). Une rigueur de recherche, publiée à EGC 2026.",
+    chat: { placeholder: "Pose ta question sur mon travail", send: "Demander" },
+    chips: [
+      { label: "Intro en 30 s", q: "Présente-toi en 30 secondes." },
+      { label: "Ton article EGC 2026 ?", q: "Parle-moi de ton article EGC 2026." },
+      { label: "Ton impact concret ?", q: "Quel impact concret et mesurable as-tu livré ?" },
+      { label: "Pourquoi te recruter ?", q: "Pourquoi devrait-on te recruter ? Qu'est-ce qui te distingue ?" },
+    ],
+    seeInv: "Voir la publication",
+    status: { prefix: "ACTUELLEMENT", role: "Data Scientist / AI Engineer · à l'écoute du marché", loc: "Paris, France" },
+    readout: { lab: "Le profil", h2: "Un ingénieur obsédé par la qualité de la donnée." },
+    card: {
+      role: "Poste", base: "Lieu", degrees: "Diplômes", focus: "Focus", cloud: "Cloud", languages: "Langues",
+      roleV: "Data Scientist / AI Engineer", baseV: "Paris, France", degreesV: "ENSAI × INSEA (double)", focusV: "NLP/GenAI · ML · Séries temporelles", cloudV: "GCP · BigQuery · Cloud Run", languagesV: "FR · EN · العربية",
+    },
+    bio: {
+      p1: "Je conçois des systèmes de données et d'IA de bout en bout, de l'ingénierie des bases de données aux architectures d'IA générative (NLP, RAG, LLM). Chez Orange Research, j'ai passé six mois à traquer les données mal étiquetées avec les fonctions d'influence ; l'étude est devenue un article en premier auteur à EGC 2026.",
+      quote: "« Faire de la donnée et de l'intelligence artificielle un véritable levier de décision et de valeur métier. »",
+      sig: "// double diplôme d'ingénieur ENSAI & INSEA · premier auteur à EGC 2026 · TOEIC 860/990",
+    },
+    inv: {
+      lab: "Publication signature · EGC 2026",
+      titlePre: "Traquer le ", titleEm: "label noise", titlePost: " par fonctions d'influence.",
+      tag: "Premier auteur · RNTI-E-42 · pages 229-240",
+      paperTitle: "Fonctions d'influences pour la détection d'exemples mal étiquetés : une étude comparative",
+      paperDesc: "Avec Pierre Nodet et Vincent Lemaire (Orange Research). Nous comparons les méthodes de fonctions d'influence pour identifier les exemples d'entraînement mal étiquetés et les filtrer afin d'améliorer la performance d'apprentissage en classification.",
+      open: "Lire l'article ↗",
+    },
+    stats: ["Datasets benchmarkés", "Modèles entraînés (environ)", "Balanced accuracy, avant", "Après filtrage du label noise"],
+    sigNote: "Une étude comparative des fonctions d'influence pour détecter les données d'entraînement mal étiquetées, menée pendant mon stage de fin d'études chez Orange Research (équipe ADIS) sur 14 datasets textuels et tabulaires, et publiée dans les actes d'EGC 2026.",
+    track: {
+      lab: "Parcours", h2: "De la recherche aux systèmes qui tournent.",
+      items: [
+        { title: "Recherche label noise & ML engineering", org: " · Orange · Stage de fin d'études", metric: "75% → 84% de balanced accuracy", desc: "ETL de 14 datasets, benchmark d'environ 136 000 modèles comparant les variantes de fonctions d'influence ; publié à EGC 2026.", when: "AVR-SEPT 2025" },
+        { title: "Prévision des températures & krigeage", org: " · CREST · Stage", metric: "RMSE 5.152", desc: "Hybride additif SARIMA-LSTM (contre 6.845 pour SARIMA seul) ; krigeage spatial à variogramme DNN, R² 99.25% en test.", when: "JUIN-AOÛT 2024" },
+        { title: "GenAI RAG sur rapports financiers", org: " · Projet perso", metric: "LangChain · LlamaParse · FAISS", desc: "Un pipeline RAG sur des rapports financiers PDF avec un parsing précis des documents.", when: "OPEN SOURCE" },
+        { title: "Pipeline de sentiments RoBERTa", org: " · Projet perso", metric: "FastAPI · Streamlit", desc: "Un pipeline NLP complet sur avis clients, servi en API REST avec une interface dédiée.", when: "OPEN SOURCE" },
+        { title: "Data Analyst", org: " · Haut Commissariat au Plan", metric: "Agadir, Maroc", desc: "L'institution nationale de la statistique et de la planification du Maroc.", when: "JUIL. 2022" },
+      ],
+    },
+    proof: {
+      lab: "Les preuves, en chiffres", h2: "Des résultats que je peux défendre.",
+      desc: [
+        "RMSE · prévision des températures, hybride SARIMA-LSTM (CREST)",
+        "R² en test · variogramme ajusté par DNN pour le krigeage (CREST)",
+        "Bases de données médicales complexes fusionnées et nettoyées",
+        "Précision du SVM · projet de données médicales",
+        "Score TOEIC · anglais B2+",
+        "Certificats de cours (IBM, Huawei, UPenn)",
+      ],
+    },
+    signals: {
+      lab: "Signaux", h2: "Ce qui l'atteste.",
+      paper: { tag: "Évalué par les pairs · RNTI", title: "EGC 2026 · RNTI-E-42", desc: "Article en premier auteur, pages 229-240, avec Pierre Nodet et Vincent Lemaire (Orange Research) : fonctions d'influence pour la détection des données mal étiquetées." },
+      github: { tag: "Open source · GitHub", title: "LLM-RAG & Sentiment-Analysis-NLP", desc: "Un pipeline RAG sur rapports financiers PDF, et un pipeline de sentiments RoBERTa servi via FastAPI avec une interface Streamlit." },
+      certs: { tag: "Certifications", title: "IBM · Huawei · UPenn", desc: "HCIA-AI (Huawei), quatre cours IBM Skills Network via Coursera, et Data Analysis Using Python (University of Pennsylvania). Plus le TOEIC 860/990." },
+      education: { tag: "Formation", title: "ENSAI × INSEA, double diplôme", desc: "Diplôme d'ingénieur à l'ENSAI (Data Science & Statistics, 2023-2025) et à l'INSEA (Data Science, 2021-2023), après un DEUG de mathématiques à l'Université Ibn Zohr." },
+    },
+    talk: { eyebrow: "Ne lis pas un CV. Interroge-le.", h2pre: "Parle à ", h2em: "mon modèle", lede: "J'ai construit une IA ancrée qui répond à ma place, en français, anglais ou arabe. Pose-lui une question sur un projet, une métrique, ou comment j'aborderais ton problème.", open: "Ouvrir le chat" },
+    footer: { left: "© 2026 Mohamed Boukrani · Portfolio conversationnel", baraka: "Fait avec rigueur, zéro chiffre inventé." },
+  },
+
+  ar: {
+    nav: { investigation: "المنشور", track: "المسار", signals: "إشارات", contact: "تواصل" },
+    eyebrow: "عالِم بيانات · مهندس ذكاء اصطناعي · ENSAI × INSEA",
+    hero: { l1: "أجعل البيانات ", glow: "موثوقة", l2: ".", shipPre: "ثم ", shipStrong: "أبني عليها الذكاء الاصطناعي." },
+    lede: "أنظمة بيانات وذكاء اصطناعي متكاملة، من هندسة قواعد البيانات إلى الذكاء الاصطناعي التوليدي (NLP، RAG، LLM). صرامة بحثية، منشورة في EGC 2026.",
+    chat: { placeholder: "اسأل عن عملي", send: "اسأل" },
+    chips: [
+      { label: "تعريف في 30 ثانية", q: "قدّم نفسك في 30 ثانية." },
+      { label: "مقالك في EGC 2026؟", q: "حدّثني عن مقالك في EGC 2026." },
+      { label: "أثرك الملموس؟", q: "ما هو الأثر الملموس والقابل للقياس الذي حققته؟" },
+      { label: "لماذا نوظّفك؟", q: "لماذا يجب أن نوظّفك؟ ما الذي يميّزك؟" },
+    ],
+    seeInv: "شاهد المنشور",
+    status: { prefix: "حالياً", role: "Data Scientist / AI Engineer · منفتح على الفرص", loc: "باريس، فرنسا" },
+    readout: { lab: "الملف", h2: "مهندس مهووس بجودة البيانات." },
+    card: {
+      role: "المنصب", base: "المكان", degrees: "الشهادات", focus: "التركيز", cloud: "السحابة", languages: "اللغات",
+      roleV: "Data Scientist / AI Engineer", baseV: "باريس، فرنسا", degreesV: "ENSAI × INSEA (مزدوج)", focusV: "NLP/GenAI · ML · سلاسل زمنية", cloudV: "GCP · BigQuery · Cloud Run", languagesV: "FR · EN · العربية",
+    },
+    bio: {
+      p1: "أصمّم أنظمة بيانات وذكاء اصطناعي من البداية إلى النهاية، من هندسة قواعد البيانات إلى معماريات الذكاء الاصطناعي التوليدي (NLP، RAG، LLM). في Orange Research أمضيت ستة أشهر في مطاردة البيانات مغلوطة التصنيف بدوال التأثير؛ وتحوّلت الدراسة إلى مقال بصفتي المؤلف الأول في EGC 2026.",
+      quote: "«جعل البيانات والذكاء الاصطناعي رافعة حقيقية للقرار وللقيمة المهنية.»",
+      sig: "// شهادة مهندس مزدوجة ENSAI و INSEA · المؤلف الأول في EGC 2026 · TOEIC 860/990",
+    },
+    inv: {
+      lab: "منشور مميّز · EGC 2026",
+      titlePre: "مطاردة ", titleEm: "الأخطاء في التصنيفات", titlePost: " بدوال التأثير.",
+      tag: "المؤلف الأول · RNTI-E-42 · الصفحات 229-240",
+      paperTitle: "Fonctions d'influences pour la détection d'exemples mal étiquetés : une étude comparative",
+      paperDesc: "مع Pierre Nodet و Vincent Lemaire (Orange Research). نقارن طرق دوال التأثير لتحديد أمثلة التدريب مغلوطة التصنيف وتصفيتها لتحسين أداء التعلّم في التصنيف.",
+      open: "اقرأ المقال ↗",
+    },
+    stats: ["مجموعة بيانات في المقارنة", "نموذج مدرَّب (تقريباً)", "الدقة المتوازنة، قبل", "بعد تصفية الأخطاء"],
+    sigNote: "دراسة مقارنة لدوال التأثير لكشف بيانات التدريب مغلوطة التصنيف، أُنجزت خلال تدريب نهاية الدراسة في Orange Research (فريق ADIS) على 14 مجموعة بيانات نصية وجدولية، ونُشرت في أعمال مؤتمر EGC 2026.",
+    track: {
+      lab: "المسار", h2: "من البحث إلى أنظمة تعمل فعلاً.",
+      items: [
+        { title: "بحث في label noise وهندسة ML", org: " · Orange · تدريب نهاية الدراسة", metric: "75% ← 84% دقة متوازنة", desc: "ETL لـ 14 مجموعة بيانات، ومقارنة بنحو 136 000 نموذج مدرَّب لطرق دوال التأثير؛ نُشر في EGC 2026.", when: "أبريل-سبتمبر 2025" },
+        { title: "التنبؤ بدرجات الحرارة والـ kriging", org: " · CREST · تدريب", metric: "RMSE 5.152", desc: "نموذج هجين SARIMA-LSTM (مقابل 6.845 لـ SARIMA وحده)؛ kriging مكاني بـ variogram معدَّل بشبكة عصبية، R² بنسبة 99.25% في الاختبار.", when: "يونيو-أغسطس 2024" },
+        { title: "GenAI RAG على تقارير مالية", org: " · مشروع شخصي", metric: "LangChain · LlamaParse · FAISS", desc: "خط RAG على تقارير مالية PDF مع تحليل دقيق للمستندات.", when: "مفتوح المصدر" },
+        { title: "خط مشاعر RoBERTa", org: " · مشروع شخصي", metric: "FastAPI · Streamlit", desc: "خط NLP كامل على آراء العملاء، مقدَّم كواجهة REST API مع واجهة مخصصة.", when: "مفتوح المصدر" },
+        { title: "محلل بيانات", org: " · المندوبية السامية للتخطيط", metric: "أكادير، المغرب", desc: "المؤسسة الوطنية للإحصاء والتخطيط في المغرب.", when: "يوليو 2022" },
+      ],
+    },
+    proof: {
+      lab: "البراهين بالأرقام", h2: "نتائج أستطيع الدفاع عنها.",
+      desc: [
+        "RMSE · التنبؤ بدرجات الحرارة، هجين SARIMA-LSTM (CREST)",
+        "R² في الاختبار · variogram معدَّل بشبكة عصبية للـ kriging (CREST)",
+        "قواعد بيانات طبية معقدة دُمجت ونُظفت",
+        "دقة SVM · مشروع البيانات الطبية",
+        "نتيجة TOEIC · إنجليزية B2+",
+        "شهادات دورات (IBM، Huawei، UPenn)",
+      ],
+    },
+    signals: {
+      lab: "إشارات", h2: "ما يدعم ذلك.",
+      paper: { tag: "محكَّم · RNTI", title: "EGC 2026 · RNTI-E-42", desc: "مقال بصفة المؤلف الأول، الصفحات 229-240، مع Pierre Nodet و Vincent Lemaire (Orange Research): دوال التأثير لكشف البيانات مغلوطة التصنيف." },
+      github: { tag: "مفتوح المصدر · GitHub", title: "LLM-RAG و Sentiment-Analysis-NLP", desc: "خط RAG على تقارير مالية PDF، وخط مشاعر RoBERTa مقدَّم عبر FastAPI مع واجهة Streamlit." },
+      certs: { tag: "شهادات", title: "IBM · Huawei · UPenn", desc: "HCIA-AI (Huawei)، وأربع دورات IBM Skills Network عبر Coursera، و Data Analysis Using Python (جامعة بنسلفانيا). إضافة إلى TOEIC 860/990." },
+      education: { tag: "التعليم", title: "ENSAI × INSEA، شهادة مزدوجة", desc: "دبلوم مهندس من ENSAI (علوم البيانات والإحصاء، 2023-2025) ومن INSEA (علوم البيانات، 2021-2023)، بعد DEUG في الرياضيات من جامعة ابن زهر." },
+    },
+    talk: { eyebrow: "لا تقرأ السيرة، استجوبها.", h2pre: "تحدّث إلى ", h2em: "نموذجي", lede: "بنيتُ ذكاءً اصطناعياً مُؤصَّلاً يجيب بالنيابة عني، بالعربية والفرنسية والإنجليزية. اسأله عن مشروع، أو رقم، أو كيف سأتعامل مع مشكلتك.", open: "افتح المحادثة" },
+    footer: { left: "© 2026 محمد بوكراني · بورتفوليو تفاعلي", baraka: "بُني بدقة، بلا أرقام مختلقة." },
+  },
+};

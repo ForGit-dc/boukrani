@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Deep-black + Orange-brand premium dark theme (Nuit Orange), matching the landing identity (.lp). */
+    --background: 20 16% 4%;
+    --foreground: 39 35% 92%;
+
+    --card: 24 14% 7%;
+    --card-foreground: 39 35% 92%;
+
+    --popover: 24 14% 7%;
+    --popover-foreground: 39 35% 92%;
+
+    --primary: 28 100% 50%;
+    --primary-foreground: 33 66% 8%;
+
+    --secondary: 30 16% 10%;
+    --secondary-foreground: 39 35% 92%;
+
+    --muted: 30 16% 10%;
+    --muted-foreground: 36 13% 60%;
+
+    --accent: 28 100% 50%;
+    --accent-foreground: 33 66% 8%;
+
+    /* Chat / hero background + bubble tokens */
+    --bg-slate-start: 20 16% 4%;   /* #0B0908 deep warm black */
+    --bg-slate-end: 24 17% 2%;     /* slightly darker */
+    --chat-user: 30 16% 10%;       /* user bubble */
+    --chat-assistant: 24 14% 7%;  /* assistant surface */
+    --chat-border: 37 27% 13%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 39 35% 95%;
+
+    --border: 37 27% 13%;
+    --input: 37 27% 13%;
+    --ring: 28 100% 50%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 24 14% 7%;
+    --sidebar-foreground: 39 35% 92%;
+    --sidebar-primary: 28 100% 50%;
+    --sidebar-primary-foreground: 33 66% 8%;
+    --sidebar-accent: 30 16% 10%;
+    --sidebar-accent-foreground: 39 35% 92%;
+    --sidebar-border: 37 27% 13%;
+    --sidebar-ring: 28 100% 50%;
+  }
+
+  .dark {
+    --background: 20 16% 4%;
+    --foreground: 39 35% 92%;
+
+    --card: 24 14% 7%;
+    --card-foreground: 39 35% 92%;
+
+    --popover: 24 14% 7%;
+    --popover-foreground: 39 35% 92%;
+
+    --primary: 28 100% 50%;
+    --primary-foreground: 33 66% 8%;
+
+    --secondary: 30 16% 10%;
+    --secondary-foreground: 39 35% 92%;
+
+    --muted: 30 16% 10%;
+    --muted-foreground: 36 13% 60%;
+
+    --accent: 28 100% 50%;
+    --accent-foreground: 33 66% 8%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 39 35% 95%;
+
+    --border: 37 27% 13%;
+    --input: 37 27% 13%;
+    --ring: 28 100% 50%;
+    --bg-slate-start: 20 16% 4%;
+    --bg-slate-end: 24 17% 2%;
+    --chat-user: 30 16% 10%;
+    --chat-assistant: 24 14% 7%;
+    --chat-border: 37 27% 13%;
+    --sidebar-background: 24 14% 7%;
+    --sidebar-foreground: 39 35% 92%;
+    --sidebar-primary: 28 100% 50%;
+    --sidebar-primary-foreground: 33 66% 8%;
+    --sidebar-accent: 30 16% 10%;
+    --sidebar-accent-foreground: 39 35% 92%;
+    --sidebar-border: 37 27% 13%;
+    --sidebar-ring: 28 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  /* Arabic font for RTL layout */
+  html[dir="rtl"] {
+    font-family: "Tajawal", system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image: radial-gradient(hsl(var(--accent)) / 0.07 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+  }
+
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .gradient-shine {
+    background: linear-gradient(135deg,
+      hsl(var(--accent) / 0.8) 0%,
+      hsl(var(--primary) / 0.9) 50%,
+      hsl(var(--accent) / 0.8) 100%);
+  }
+
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
+  .typing-dots { display: inline-flex; gap: 2px; }
+  .typing-dots span {
+    width: 6px; height: 6px; border-radius: 999px;
+    background-color: hsl(var(--muted-foreground));
+    opacity: 0.4; transform: scale(0.9);
+    animation: dot 1.2s infinite ease-in-out;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  @keyframes dot {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(0.9); }
+    30% { opacity: 0.8; transform: scale(1); }
+  }
+
+  /* Subtle line animation for chat background */
+  @keyframes dash { to { stroke-dashoffset: -1000; } }
+  .animate-dash { animation: dash 18s linear infinite; }
+  .animate-dash-slow { animation: dash 28s linear infinite; }
+
+  /* Gentle float for decorative dots */
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .float-slow { animation: float 6s ease-in-out infinite; }
+}
+
+/* Custom scrollbar for chat messages area */
+@layer utilities {
+  .scrollbar-chat {
+    scrollbar-gutter: stable both-edges;
+  }
+  .scrollbar-chat::-webkit-scrollbar {
+    width: 12px;
+  }
+  .scrollbar-chat:hover::-webkit-scrollbar {
+    width: 14px;
+  }
+  .scrollbar-chat::-webkit-scrollbar-track {
+    background: #0B0908;
+    border-radius: 10px;
+  }
+  .scrollbar-chat::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #FF7900 0%, #C25E00 100%);
+    border-radius: 10px;
+    border: 3px solid #0B0908;
+  }
+  .scrollbar-chat::-webkit-scrollbar-thumb:hover {
+    background: #FF7900;
+  }
+  /* Firefox */
+  .scrollbar-chat {
+    scrollbar-width: thin;
+    scrollbar-color: #FF7900 #0B0908;
+  }
+}
