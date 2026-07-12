@@ -14,6 +14,12 @@ declare global {
   }
 }
 
+// Optional Cloudflare Turnstile CAPTCHA. The widget renders ONLY when a site key
+// is configured (VITE_TURNSTILE_SITE_KEY, public by design). Without a key the
+// widget is skipped entirely; a hardcoded key from another deployment would fail
+// domain validation and Cloudflare would render its unstyled "Troubleshoot" link.
+const TURNSTILE_SITE_KEY = (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) || "";
+
 type Props = {
   onSend: (e: React.FormEvent, turnstileToken?: string) => void;
   input: string;
@@ -26,6 +32,8 @@ export function ChatInput({ onSend, input, setInput }: Props) {
   const widgetIdRef = useRef<string | null>(null);
 
   useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return; // CAPTCHA disabled for this deployment
+
     // Load Turnstile script
     const script = document.createElement('script');
     script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
@@ -36,7 +44,7 @@ export function ChatInput({ onSend, input, setInput }: Props) {
     script.onload = () => {
       if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: '0x4AAAAAAAzxlMvAaSFpbB5n', // Cloudflare Turnstile site key (public, safe to commit)
+          sitekey: TURNSTILE_SITE_KEY,
           theme: 'dark',
           size: 'compact',
         });
@@ -46,6 +54,7 @@ export function ChatInput({ onSend, input, setInput }: Props) {
     return () => {
       if (window.turnstile && widgetIdRef.current) {
         window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
       }
       document.body.removeChild(script);
     };
@@ -53,11 +62,11 @@ export function ChatInput({ onSend, input, setInput }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const token = window.turnstile && widgetIdRef.current 
+    const token = window.turnstile && widgetIdRef.current
       ? window.turnstile.getResponse(widgetIdRef.current)
       : undefined;
     onSend(e, token);
-    
+
     // Reset turnstile after submission
     if (window.turnstile && widgetIdRef.current) {
       window.turnstile.reset(widgetIdRef.current);
@@ -66,7 +75,7 @@ export function ChatInput({ onSend, input, setInput }: Props) {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="px-4 pb-2 space-y-2">
-      <div ref={turnstileRef} className="flex justify-center" />
+      {TURNSTILE_SITE_KEY ? <div ref={turnstileRef} className="flex justify-center" /> : null}
       <div className="flex gap-2 items-end rounded-xl border border-border bg-card/70 backdrop-blur-sm p-1.5 pl-3.5 transition-colors focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/25">
         <Textarea
           aria-label="Type your question"
