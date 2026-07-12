@@ -234,7 +234,7 @@ export default function DataScientistHero() {
             <div className="readout">
               <div className="readout-left reveal">
                 <figure className="portrait">
-                  <img src="/portrait.jpg" alt="Mohamed Boukrani" loading="lazy"
+                  <img src={`${import.meta.env.BASE_URL}portrait.jpg`} alt="Mohamed Boukrani" loading="lazy"
                     onError={(e) => { const f = e.currentTarget.closest(".portrait"); if (f) (f as HTMLElement).style.display = "none"; }} />
                   <figcaption className="frame-tag">Paris · 2026</figcaption>
                 </figure>

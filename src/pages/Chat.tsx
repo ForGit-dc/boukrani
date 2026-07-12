@@ -679,7 +679,7 @@ export default function Chat() {
         {isMobile && (
           <header className="flex items-center justify-between h-14 px-4 bg-background/80 backdrop-blur-sm border-b border-border sticky top-0 z-40">
             <div className="flex items-center gap-3">
-              <a href="/" aria-label="Back to intro" className="inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/40">
+              <a href={import.meta.env.BASE_URL} aria-label="Back to intro" className="inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/40">
                 <ChevronLeft className="h-5 w-5" />
               </a>
               <span className="font-semibold text-lg">Mohamed AI</span>
@@ -733,12 +733,12 @@ export default function Chat() {
         {!isMobile && (
           <header className="h-10 flex items-center justify-between">
             <div className="flex items-center gap-2 rounded-full bg-background/70 backdrop-blur-sm ring-1 ring-border/60 shadow-sm px-2.5 py-1.5">
-              <a href="/" aria-label="Back to intro" className="inline-flex items-center justify-center h-6 w-6 rounded-full ring-1 ring-border/50 hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/40">
+              <a href={import.meta.env.BASE_URL} aria-label="Back to intro" className="inline-flex items-center justify-center h-6 w-6 rounded-full ring-1 ring-border/50 hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/40">
                 <ChevronLeft className="h-4 w-4" />
               </a>
               <Avatar className="h-6 w-6">
                 <AvatarFallback>MB</AvatarFallback>
-                <AvatarImage src="/portrait.jpg" alt={getPortraitAlt()} />
+                <AvatarImage src={getPortraitUrl()} alt={getPortraitAlt()} />
               </Avatar>
               <span className="text-sm font-medium">Mohamed AI</span>
               <span className="ml-1 inline-flex h-2 w-2 rounded-full bg-green-500" aria-label="online" />

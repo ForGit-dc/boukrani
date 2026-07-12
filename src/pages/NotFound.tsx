@@ -16,7 +16,7 @@ const NotFound = () => {
       <section className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
         <p className="text-xl text-muted-foreground mb-4">Oops! Page not found</p>
-        <a href="/" className="underline underline-offset-4 text-primary hover:opacity-90">
+        <a href={import.meta.env.BASE_URL} className="underline underline-offset-4 text-primary hover:opacity-90">
           Return to Home
         </a>
       </section>

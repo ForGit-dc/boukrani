@@ -11,8 +11,10 @@ const defaults: AppConfig = {
   SHOW_POWERED: false,
   PROFILE_PHOTO_ALT_EN: "Portrait of Mohamed Boukrani, Data Scientist / AI Engineer",
   HERO_ALT_EN: "Data-science themed illustration for Mohamed Boukrani",
-  HERO_IMAGE_URL: "/portrait.jpg",
-  PORTRAIT_IMAGE_URL: "/portrait.jpg",
+  // Base-path aware: the site may be served under a sub-path (GitHub project page),
+  // so never hardcode root-relative asset URLs.
+  HERO_IMAGE_URL: import.meta.env.BASE_URL + "portrait.jpg",
+  PORTRAIT_IMAGE_URL: import.meta.env.BASE_URL + "portrait.jpg",
 };
 
 export function getConfig(): AppConfig {

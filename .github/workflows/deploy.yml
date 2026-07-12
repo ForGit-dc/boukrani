@@ -1,4 +1,15 @@
-name: Deploy to GitHub Pages
+# Build the Vite SPA and publish it to GitHub Pages on every push to main.
+# This is the whole deploy story: push to git, the Action builds and publishes,
+# you get a URL at https://<user>.github.io/<repo>/ (or your custom domain).
+#
+# Per-repo setup (done once by scaffold-client / deploy.sh, or by hand):
+#   Settings > Pages > Build and deployment > Source = "GitHub Actions"
+#   Settings > Secrets and variables > Actions > Variables:
+#     VITE_SUPABASE_URL       https://<project-ref>.supabase.co
+#     VITE_SUPABASE_ANON_KEY  the public anon key (safe in the client bundle)
+#     VITE_BASE               "/<repo>/" for a project page, or "/" for a
+#                             user/org page or a custom domain (optional, default "/")
+name: Deploy portfolio to GitHub Pages
 
 on:
   push:
@@ -11,36 +22,30 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
           cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
+      - run: npm ci
       - name: Build
         env:
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
           VITE_BASE: ${{ vars.VITE_BASE }}
-        run: npm run build -- --base=$VITE_BASE
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        run: npm run build
+      - name: SPA fallback for deep links (BrowserRouter)
+        run: cp dist/index.html dist/404.html
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist
 
   deploy:
     needs: build
@@ -49,6 +54,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4

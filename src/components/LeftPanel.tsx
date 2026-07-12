@@ -74,7 +74,7 @@ export const LeftPanel = memo(function LeftPanel({
       <div className="flex flex-col items-center text-center">
         <Avatar className="h-24 w-24 ring-2 ring-accent/30 shadow-sm">
           <AvatarFallback>MB</AvatarFallback>
-          <AvatarImage src="/portrait.jpg" alt={getPortraitAlt()} className="object-cover" />
+          <AvatarImage src={getPortraitUrl()} alt={getPortraitAlt()} className="object-cover" />
         </Avatar>
         <h2 className="mt-3 text-xl font-semibold tracking-tight">{displayName}</h2>
         <p className="text-sm text-primary mt-1 tracking-tight">Data Scientist (ENSAI & INSEA)</p>
