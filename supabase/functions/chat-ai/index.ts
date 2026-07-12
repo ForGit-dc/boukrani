@@ -181,7 +181,7 @@ serve(async (req) => {
 
     const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
-    // Check session question limit (7 questions max per demo session)
+    // Check session question limit (20 questions max per demo session)
     const { count: questionCount, error: countError } = await withTimeout(
       admin.from("conversations").select("*", { count: "exact", head: true }).eq("session_id", sessionId),
       2500,
@@ -192,11 +192,11 @@ serve(async (req) => {
       console.error("[Internal] Failed to check session limit:", countError);
     }
 
-    if (questionCount && questionCount >= 7) {
+    if (questionCount && questionCount >= 20) {
       return new Response(
         JSON.stringify({
           error: "session_limit_exceeded",
-          message: "You have reached the 7 question limit for this demo session.",
+          message: "You have reached the 20 question limit for this demo session.",
         }),
         { status: 429, headers: { ...corsHeaders, ...securityHeaders, "Content-Type": "application/json" } },
       );

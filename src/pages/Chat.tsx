@@ -173,7 +173,7 @@ export default function Chat() {
            lang === 'ar' ? "ما الذي اشتغلت عليه في Orange؟" :
            "What did you work on at Orange?"
   }], [t, lang]);
-  const MAX_QUESTIONS = 7;
+  const MAX_QUESTIONS = 20;
   const userCount = useMemo(() => messages.filter(m => m.role === "user").length, [messages]);
   const limitReached = userCount >= MAX_QUESTIONS;
   const [parallax, setParallax] = useState({
@@ -385,10 +385,10 @@ export default function Chat() {
     if (!trimmed) return;
     if (limitReached) {
       const limitText = lang === 'fr'
-        ? "Merci pour ton intérêt ! Cette démo est limitée à 7 questions par session. Pour continuer la conversation, écris-moi sur LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) ou par email à mohamedboukrani7@gmail.com."
+        ? `Merci pour ton intérêt ! Cette démo est limitée à ${MAX_QUESTIONS} questions par session. Pour continuer la conversation, écris-moi sur LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) ou par email à mohamedboukrani7@gmail.com.`
         : lang === 'ar'
-        ? "شكرًا على اهتمامك! هذه النسخة التجريبية محدودة بـ 7 أسئلة لكل جلسة. لمواصلة الحديث، تواصل معي على LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) أو عبر البريد mohamedboukrani7@gmail.com."
-        : "Thanks for your interest! This demo is limited to 7 questions per session. To keep the conversation going, reach me on LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) or by email at mohamedboukrani7@gmail.com.";
+        ? `شكرًا على اهتمامك! هذه النسخة التجريبية محدودة بـ ${MAX_QUESTIONS} أسئلة لكل جلسة. لمواصلة الحديث، تواصل معي على LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) أو عبر البريد mohamedboukrani7@gmail.com.`
+        : `Thanks for your interest! This demo is limited to ${MAX_QUESTIONS} questions per session. To keep the conversation going, reach me on LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) or by email at mohamedboukrani7@gmail.com.`;
       const notice: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
@@ -484,11 +484,25 @@ export default function Chat() {
         if (!error) break;
         if (attempt === 0) await new Promise(r => setTimeout(r, 1200));
       }
-      const errMsg = detectedLang === 'fr'
+      // On failure, tell apart the demo's per-session question limit (server 429
+      // "session_limit_exceeded") from a real outage, so the visitor gets the right
+      // message instead of a scary "unavailable".
+      let serverError: any = null;
+      if (error) {
+        try { serverError = await (error as any)?.context?.json?.(); } catch { /* body not JSON */ }
+      }
+      const isSessionLimit = serverError?.error === "session_limit_exceeded";
+      const limitMsg = detectedLang === 'fr'
+        ? `Merci pour ton intérêt ! Cette démo est limitée à ${MAX_QUESTIONS} questions par session. Pour continuer, écris-moi sur LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) ou par email à mohamedboukrani7@gmail.com.`
+        : detectedLang === 'ar'
+        ? `شكرًا على اهتمامك! هذه النسخة التجريبية محدودة بـ ${MAX_QUESTIONS} أسئلة لكل جلسة. للمتابعة، تواصل معي على LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) أو عبر البريد mohamedboukrani7@gmail.com.`
+        : `Thanks for your interest! This demo is limited to ${MAX_QUESTIONS} questions per session. To keep going, reach me on LinkedIn (linkedin.com/in/mohamed-boukrani-220046210) or by email at mohamedboukrani7@gmail.com.`;
+      const outageMsg = detectedLang === 'fr'
         ? "Désolé, l'assistant est momentanément indisponible. Réessaie dans un instant."
         : detectedLang === 'ar'
         ? "عذرًا، المساعد غير متاح حاليًا. يرجى المحاولة بعد لحظات."
         : "Sorry, the assistant is unavailable right now. Please try again.";
+      const errMsg = isSessionLimit ? limitMsg : outageMsg;
       const replyText = error ? errMsg : data?.generatedText as string || "(No response)";
       streamReply(replyText);
       if (data?.debug && debugMode) {
@@ -1049,9 +1063,9 @@ export default function Chat() {
           </div>
         )}
         <footer className="mt-2 text-center text-xs text-muted-foreground">
-          {lang === 'fr' ? 'Astuce : cette démo est limitée à 7 questions par session.'
-            : lang === 'ar' ? 'ملاحظة: هذه النسخة التجريبية محدودة بـ 7 أسئلة لكل جلسة.'
-            : 'Tip: This demo limits to 7 questions per session.'}
+          {lang === 'fr' ? `Astuce : cette démo est limitée à ${MAX_QUESTIONS} questions par session.`
+            : lang === 'ar' ? `ملاحظة: هذه النسخة التجريبية محدودة بـ ${MAX_QUESTIONS} أسئلة لكل جلسة.`
+            : `Tip: This demo limits to ${MAX_QUESTIONS} questions per session.`}
           {debugMode && <div className="mt-2 text-[11px] font-mono bg-background/50 p-2 rounded border">
               <span>scrollTop: {Math.round(scrollTop)}</span>
               <span className="mx-2">•</span>
