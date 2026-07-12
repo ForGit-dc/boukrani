@@ -182,7 +182,7 @@ export const LeftPanel = memo(function LeftPanel({
   return (
     <aside 
       dir={lang === "ar" ? "rtl" : "ltr"}
-      className="sticky top-16 max-h-[calc(100dvh-112px)] overflow-y-auto overscroll-contain"
+      className="h-full min-h-0 overflow-y-auto overscroll-contain"
     >
       <Card className="p-5 bg-card/50 border-border">
         {profileContent}

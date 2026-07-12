@@ -463,23 +463,27 @@ export default function Chat() {
       }, 20);
     };
     try {
-      const {
-        data,
-        error
-      } = await supabase.functions.invoke("chat-ai", {
-        body: {
-          message: trimmed,
-          session_id: sessionIdRef.current,
-          lang,
-          temperature: 0.1,
-          maxTokens: 220,
-          debug: debugMode ? 1 : 0,
-          strict: strictMode ? 1 : 0
-        },
-        headers: turnstileToken ? {
-          'X-Turnstile-Token': turnstileToken
-        } : undefined
-      });
+      // Retry once on a transient failure (cold start / brief network blip) so a
+      // recoverable hiccup doesn't surface the "unavailable" message to the visitor.
+      let data: any, error: any;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        ({ data, error } = await supabase.functions.invoke("chat-ai", {
+          body: {
+            message: trimmed,
+            session_id: sessionIdRef.current,
+            lang,
+            temperature: 0.1,
+            maxTokens: 220,
+            debug: debugMode ? 1 : 0,
+            strict: strictMode ? 1 : 0
+          },
+          headers: turnstileToken ? {
+            'X-Turnstile-Token': turnstileToken
+          } : undefined
+        }));
+        if (!error) break;
+        if (attempt === 0) await new Promise(r => setTimeout(r, 1200));
+      }
       const errMsg = detectedLang === 'fr'
         ? "Désolé, l'assistant est momentanément indisponible. Réessaie dans un instant."
         : detectedLang === 'ar'
@@ -631,7 +635,7 @@ export default function Chat() {
     };
   };
   return <TooltipProvider key={lang}>
-    <main className="relative min-h-[100dvh] overflow-hidden bg-[linear-gradient(to_bottom,hsl(var(--bg-slate-start)),hsl(var(--bg-slate-end)))]">
+    <main className="relative h-[100dvh] overflow-hidden bg-[linear-gradient(to_bottom,hsl(var(--bg-slate-start)),hsl(var(--bg-slate-end)))]">
       <div className="hidden">
         {/* Animated data flow lines */}
         <div className="absolute inset-0" style={{
@@ -674,7 +678,7 @@ export default function Chat() {
           <div className="w-full h-full bg-[radial-gradient(30%_30%_at_15%_30%,hsl(var(--accent)/0.08),transparent_70%),radial-gradient(30%_30%_at_85%_70%,hsl(var(--accent)/0.06),transparent_70%)]" />
         </div>
       </div>
-      <section className="relative z-0 container mx-auto px-4 md:px-6">
+      <section className="relative z-0 container mx-auto px-4 md:px-6 h-full flex flex-col overflow-hidden">
         {/* Mobile App Bar */}
         {isMobile && (
           <header className="flex items-center justify-between h-14 px-4 bg-background/80 backdrop-blur-sm border-b border-border sticky top-0 z-40">
@@ -750,7 +754,7 @@ export default function Chat() {
 
         {/* Desktop Layout */}
         {!isMobile && (
-          <div className="grid grid-cols-[360px,1fr] gap-6 min-h-[100dvh] overflow-hidden">
+          <div className="grid grid-cols-[360px,1fr] gap-6 flex-1 min-h-0 overflow-hidden">
             <LeftPanel 
               key={lang}
               lang={lang}
@@ -761,7 +765,7 @@ export default function Chat() {
               onSuggestedQA={handleSuggestedQAClick}
               isMobile={isMobile}
             />
-            <section className="flex flex-col min-h-[calc(100dvh-112px)] min-h-0">
+            <section className="flex flex-col h-full min-h-0 overflow-hidden">
             
               <div id="chatMessages" ref={el => {
                 scrollRef.current = el;
@@ -898,7 +902,7 @@ export default function Chat() {
 
         {/* Mobile Layout */}
         {isMobile && (
-          <div className="flex flex-col min-h-[100dvh] bg-transparent">
+          <div className="flex flex-col flex-1 min-h-0 bg-transparent">
             <div id="chatMessages" ref={el => {
               scrollRef.current = el;
               msgsRef.current = el;
