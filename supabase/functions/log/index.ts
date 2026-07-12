@@ -149,9 +149,11 @@ async function maybeSendAlertEmail(args: {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
+  // Handle CORS preflight requests. corsHeaders must be spread LAST: securityHeaders
+  // also defines Access-Control-Allow-Headers, without x-log-token/x-log-ts, and the
+  // browser silently drops the POST if the preflight doesn't allow those headers.
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: { ...corsHeaders, ...securityHeaders } });
+    return new Response(null, { headers: { ...securityHeaders, ...corsHeaders } });
   }
 
   if (req.method !== "POST") {
